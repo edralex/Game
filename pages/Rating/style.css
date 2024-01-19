@@ -28,7 +28,7 @@
 #player-score-table {
     width: 100%;
     border-collapse: collapse;
-    color: #ffffff; /* Add this line to change the text color to black */
+    color: #ffffff; 
 }
 
 #player-score-table th, #player-score-table td {

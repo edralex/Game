@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
-        <script src="script.js"></script>
+        
         <title>Числа</title>
     </head>
 <body class="body" id="suda">
@@ -15,16 +15,16 @@
        <div id="background">
         <div id="buttonPlaceholder">
             <input type="text" class="input_text" placeholder="Имя игрока">
-            <button class="watchbutton" type="button">Начать игру</button> 
+            <div id="buttonContainer">
+                <button class="complexityButton" id="easyButton" onclick="setComplexity(0)">Легко</button>
+                <button class="complexityButton" id="mediumButton" onclick="setComplexity(1)">Средне</button>
+                <button class="complexityButton" id="hardButton" onclick="setComplexity(2)">Сложно</button>
+            </div>
+            <button class="watchbutton" type="button" id="startButton">Начать игру</button> 
             <button class="watchbutton" type="button" id="ratingButton">Рекорды</button>
-<script>
-  document.getElementById("ratingButton").addEventListener("click", function() {
-    window.location.href = "../Rating/index.html";
-  });
-</script>
         </div>
        </div> 
-       
+       <script src="script.js"></script>
     </main>
 <footer class="footer">
     <div class="footcontain">

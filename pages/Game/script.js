@@ -12,50 +12,48 @@ let timingValue = 2000;
 document.addEventListener("DOMContentLoaded", init());
 
 function createFallingObject() {
-    const gameWindow = document.getElementById("gameWindow");
-    const object = document.createElement("div");
-    object.className = "falling-object";
-    switch (complexity)
-    {
-      case 0:
-        object.textContent = getRandomInteger(1, 10) 
-        break
-      case 1:
-        object.textContent = getRandomInteger(1, 10) 
-        break;
-      case 2:
-        object.textContent = getRandomFloat(1, 10,2) 
-        break;
-      default:
-        object.textContent = "err";
-        break;
-    }
-
-    // Calculate left position relative to gameWindow width
-    const gameWindowWidth = gameWindow.offsetWidth;
-    const randomLeft = Math.random() * 100;
-    const objectLeft = (randomLeft / 100) * (gameWindowWidth-70) + "px";  //-70, чтобы не падали за рамку
-    object.style.left = objectLeft;
-    
-    gameWindow.appendChild(object);
-  
-    // Add click event listener to the object
-    object.addEventListener("click", function () {
-      onObjectCatch(object)
-      gameWindow.removeChild(object);
-    });
-  
-    // Add animationend event listener to remove the object after animation finishes
-    object.addEventListener("animationend", function () {
-      gameWindow.removeChild(object);
-    });
+  const gameWindow = document.getElementById("gameWindow");
+  const object = document.createElement("div");
+  object.className = "falling-object";
+  switch (complexity)
+  {
+    case 0:
+      object.textContent = getRandomInteger(1, 10) 
+      break
+    case 1:
+      object.textContent = getRandomInteger(1, 10) 
+      break;
+    case 2:
+      object.textContent = getRandomFloat(1, 10,2) 
+      break;
+    default:
+      object.textContent = "err";
+      break;
   }
 
+  const gameWindowWidth = gameWindow.offsetWidth;
+  const randomLeft = Math.random() * 100;
+  const objectLeft = (randomLeft / 100) * (gameWindowWidth-70) + "px";  //-70, чтобы не падали за рамку
+  object.style.left = objectLeft;
 
-  setInterval(createFallingObject, timingValue);    //Создание объектов по таймеру
+  gameWindow.appendChild(object);
 
 
-function savePlayerResults(name,score)
+  object.addEventListener("click", function () {
+    onObjectCatch(object)
+    gameWindow.removeChild(object);
+  });
+
+  object.addEventListener("animationend", function () {
+    gameWindow.removeChild(object);
+  });
+}
+
+
+setInterval(createFallingObject, timingValue);    //Создание объектов по таймеру
+
+
+function savePlayerResults(name,score)    //Сохранение результатов
 {
   let listOfPlayers = JSON.parse(localStorage.getItem('listOfPlayers'))
   if (listOfPlayers === null) {
@@ -73,39 +71,34 @@ function savePlayerResults(name,score)
 const timerDuration = 60000; // 1 минута
 let timer = null;
 
-// Start the timer
+
 function startTimer() {
   const startTime = Date.now();
 
   timer = setInterval(() => {
-    // Calculate remaining time
+
     const elapsedTime = Date.now() - startTime;
     const remainingTime = timerDuration - elapsedTime;
 
-    // Update the timer element with the remaining time
     const timerElement = document.getElementById("timerElement");
     timerElement.textContent = formatTime(remainingTime);
 
-    // Check if the timer has expired
     if (remainingTime <= 0) {
       clearInterval(timer);
       timerElement.textContent = "Timer expired";
-      // Redirect to another page when the timer expires
-      // window.location.href = "https://example.com/another-page";
       finishGame();
     }
-  }, 1000); // Update every second
+  }, 1000); 
 }
 
-// Utility function to format time in "mm:ss" format
 function formatTime(time) {
   const minutes = Math.floor(time / 60000);
   const seconds = Math.floor((time % 60000) / 1000);
   return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 }
-// startTimer();
+startTimer();
 
-function getRandomInteger(min, max) {
+function getRandomInteger(min, max) {                               //Получение рандомных значений
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
@@ -114,11 +107,11 @@ const randomNum = Math.random() * (max - min) + min;
 return randomNum.toFixed(decimals);
 }
   
-// Handle Space key press events
+
 function handleKeyPress(event) {
     if (event.code === "Space") {
         event.preventDefault();     //Чтобы не прокручивалось
-      const catchLine = document.querySelector(".catch-line");
+      const catchLine = document.querySelector(".catch-line");                //catchline - зеленая линия
       const fallingObjects = document.getElementsByClassName("falling-object");
   
       const catchLineTop = catchLine.offsetTop;
@@ -140,9 +133,11 @@ function onObjectCatch(object)
 {
   stepCounter++
   currentScore += (parseFloat(object.textContent))
-  currentScore = parseFloat(currentScore.toFixed(2))
+  currentScore = parseFloat(currentScore.toFixed(2))      //Дважды парс потому что 0.0000000001
   console.log(currentScore,stepCounter,target)
-  if (currentScore >= target)
+  const scorec = document.getElementById("currentScore")
+  scorec.textContent ="Текущее число: " + currentScore;
+  if (currentScore >= target || isNaN(currentScore))
     finishGame()
 }
 
@@ -150,18 +145,28 @@ function finishGame()
 {
   if ( currentScore==target )
   {
-      let presumableScore = 100 - stepCounter * 5;
+      let presumableScore = 200 - stepCounter * 5;
       score = presumableScore > 0 ? presumableScore : 0;
   }
   else 
     score=0;
 
-  savePlayerResults(currentName,score)
+  savePlayerResults(currentName,score);
+  window.location.href = "../Rating/index.html";
 
 }
 
 function init()
 {
+
+  complexity = JSON.parse(localStorage.getItem('currentComplexity'))
+  if (complexity === null) {
+    complexity = 3
+  }
+  currentName = JSON.parse(localStorage.getItem('currentName'))
+  const nad = document.getElementById("playerName")
+  nad.textContent="Игрок: " + currentName;
+
   switch (complexity)
   {
     case 0:
@@ -173,12 +178,16 @@ function init()
       timingValue = 1000
       break;
     case 2:
-      target = getRandomFloat(120,150,2)
+      target = parseFloat(getRandomFloat(120,150,2))
       timingValue = 800;
       break;
     default:
       target = 0;
       break;
   }
+
+  console.log("inited")
+    const targ = document.getElementById("targetScore")
+  targ.textContent="Целевое число: " + target;
 }
   document.addEventListener("keydown", handleKeyPress);
