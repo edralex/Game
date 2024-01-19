@@ -1,0 +1,131 @@
+.body{
+    margin: auto;
+    min-width: 1600px;
+}
+.header{
+    grid-row: 1;
+	height: 100px;
+    display: flex;
+    background-color: black;
+	align-items: center; 
+}
+.nav{
+    min-width: 80%;
+    grid-row: 1;
+    display: flex;
+}
+.nav__list {
+	display: flex;
+    min-width: 70%;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.nav_item{
+    color:white
+}
+.nav__link {
+	color: white;
+	text-decoration: none;
+	font-weight: 700;
+}
+.nav__link:hover {
+	color:orange;
+	text-decoration: none;
+}
+li{
+    list-style-type: none;
+}
+
+.mainBack {
+    background-color: #cccccc;
+    background-size: 100% auto;
+    height: 700px;
+    /* align-items: center; */
+}
+.backtext{
+    width: 100%;
+    flex:35%;
+    text-align: center; 
+}
+.mylogo {
+    height: 10em;
+    width: 10em;
+    background-color: #0000ff;
+    border-radius: 50%;
+    position: absolute;
+    margin: auto;
+    inset: 0; 
+  }
+.mylogo::before{
+    content:"";
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    height: 50%;
+    width: 50%;
+    background-color: #00ff00;
+}
+.mylogo::after{
+    content:"";
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+	width: 0;
+	height: 0;
+	border-left: 2em solid transparent;
+	border-right: 2em solid transparent;
+	border-top: 4em solid #ff0000;
+}
+
+
+
+
+.footer{
+    width:100%;
+    height: 400px;
+    background-color: black;
+}
+
+.refo{
+    position: relative;
+    top:5%
+}
+
+.secondpart{
+    width: 25%;
+    height: 400px;
+}
+.footcontain{
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+.secondpart .nav{
+    position: relative;
+    top:80%;
+    min-width: 100%;
+}
+
+.secondpart .nav__list {
+	display: flex;
+    min-width: 100%;
+	align-items: center;
+	justify-content: space-between;
+}
+a{
+    font-family:Arial, Helvetica, sans-serif
+}
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+}
+h2{
+    font-family: Arial, Helvetica, sans-serif;
+}
+p{
+    font-family: Arial, Helvetica, sans-serif;
+}
