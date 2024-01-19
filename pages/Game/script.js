@@ -55,11 +55,6 @@ function createFallingObject() {
   setInterval(createFallingObject, timingValue);    //Создание объектов по таймеру
 
 
-  function getInfoFromLocaleStorage() {
-    let listOfPlayers = JSON.parse(localStorage.getItem('listOfPlayers'))
-    let nameFromLS = JSON.parse(localStorage.getItem('playerName'))
-
-}
 function savePlayerResults(name,score)
 {
   let listOfPlayers = JSON.parse(localStorage.getItem('listOfPlayers'))
