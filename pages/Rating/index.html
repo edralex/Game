@@ -13,12 +13,23 @@
     </header>
     <main>
        <div id="background">
-        <div id="gameWindow">
-            <div class="catch-line"></div>
-        </div>
-        <div id="menuElement">
-            <div id="timerElement"></div>
-        </div>
+<table id="player-score-table">
+    <thead>
+        <tr>
+            <th>Игрок</th>
+            <th>Счёт</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Player-score rows will be populated from JavaScript -->
+    </tbody>
+</table>
+<button class="watchbutton" type="button" id="returnToMenu">Назад</button>
+<script>
+  document.getElementById("returnToMenu").addEventListener("click", function() {
+    window.location.href = "../MainPage/index.html";
+  });
+</script>
        </div> 
        
     </main>

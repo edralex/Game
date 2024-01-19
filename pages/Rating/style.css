@@ -11,73 +11,72 @@
 }
 #background{
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
     /* justify-content: center; */
     /* align-items: center; */
-    /* background-image: url("../../assets/images/numWallpaper.jpg"); */
-    background-color: #323232;
+    gap: 3%;
+    background-image: url("../../assets/images/numWallpaper.jpg");
+    background-color: #cccccc;
     background-size: 100% auto;
     width: 100%;
     height: 780px;
 }
-#menuElement{
-    width: 50%;
-    height: 100%;
-    background-color: #cccccc;
+#returnToMenu{
+    width: 10%;
+    height: 3rem;
 }
-#gameWindow{
-    width: 50%;
-    height: 100%;
-    background-color: wheat;
+#player-score-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #ffffff; /* Add this line to change the text color to black */
 }
-.catch-line {
-    position: absolute;
-    width: 50%;
-    height: 15%;
-    top: 47.5%; /* Adjust to center the line */
-    background-color: green;
-  }
-#timerElement {
-    font-size: 24px;
-    width: 20%;
-    height: 5%;
-    font-weight: bold;
-    color: black;
-    background-color: #f2f2f2;
-    padding: 10px;
-    border-radius: 4px;
-  }
 
-
-
-  .falling-object {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 70px;
-    height: 70px;
-    background-color: red;
-    animation: fallAnimation 2s linear forwards;
-    font-family: 'Courier New', Courier, monospace;
-    color: white;
-    font-size: 1.95em;
-    user-select: none;
-  
-    /* Flexbox styles */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#player-score-table th, #player-score-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
     text-align: center;
+}
+
+#player-score-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+}
+.mylogo {
+    height: 10em;
+    width: 10em;
+    background-color: #0000ff;
+    border-radius: 50%;
+    position: absolute;
+    margin: auto;
+    inset: 0; 
   }
-  
-  @keyframes fallAnimation {
-    0% {
-      top: 0;
-    }
-    100% {
-      top: 90%;
-    }
-  }
+.mylogo::before{
+    content:"";
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    height: 50%;
+    width: 50%;
+    background-color: #00ff00;
+}
+.mylogo::after{
+    content:"";
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+	width: 0;
+	height: 0;
+	border-left: 2em solid transparent;
+	border-right: 2em solid transparent;
+	border-top: 4em solid #ff0000;
+}
 .watchbutton{
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.3rem;
