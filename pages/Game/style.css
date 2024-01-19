@@ -33,7 +33,7 @@
     position: absolute;
     width: 50%;
     height: 15%;
-    top: 47.5%; /* Adjust to center the line */
+    top: 47.5%; 
     background-color: green;
   }
 #timerElement {
