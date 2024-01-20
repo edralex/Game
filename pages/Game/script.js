@@ -209,7 +209,10 @@ function finishGame()
   }
   else 
     score=0;
-
+  if (complexity==2)
+  {
+    score = currentScore * 10;
+  }
   savePlayerResults(currentName,score);
   window.location.href = "../Rating/index.html";
 
@@ -243,7 +246,7 @@ function init()
       break
     case 2:
       target = 30;
-      timingValue = 1500;
+      timingValue = 1400;
       const scorecec = document.getElementById("explainer")
       scorecec.textContent ="Сумма из 3, первое число - итог, второе и третье число - слагаемые";
       targ.textContent="Очки: " + 0;
