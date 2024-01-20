@@ -209,6 +209,7 @@ function finishGame()
   }
   else 
     score=0;
+
   if (complexity==2)
   {
     score = currentScore * 10;
