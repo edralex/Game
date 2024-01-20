@@ -9,6 +9,11 @@ let complexity = 1;   //Сложность 0 - легко, 1 - средне, 2 -
 
 let timingValue = 2000;
 
+let firstHard = 0
+let secondHard = 0
+let thirdHard = 0
+let cnt = 0;
+
 document.addEventListener("DOMContentLoaded", init());
 
 function createFallingObject() {
@@ -19,12 +24,15 @@ function createFallingObject() {
   {
     case 0:
       object.textContent = getRandomInteger(1, 10) 
+      object.style.animation = "fallAnimation 2s linear forwards";
       break
     case 1:
       object.textContent = getRandomInteger(1, 10) 
+      object.style.animation = "flyAnimation 2s linear forwards";
       break;
     case 2:
-      object.textContent = getRandomFloat(1, 10,2) 
+      object.textContent = getRandomInteger(1, 10) 
+      object.style.animation = "weaveAnimation 4s linear forwards";
       break;
     default:
       object.textContent = "err";
@@ -132,11 +140,62 @@ function handleKeyPress(event) {
 function onObjectCatch(object)
 {
   stepCounter++
-  currentScore += (parseFloat(object.textContent))
-  currentScore = parseFloat(currentScore.toFixed(2))      //Дважды парс потому что 0.0000000001
-  console.log(currentScore,stepCounter,target)
-  const scorec = document.getElementById("currentScore")
-  scorec.textContent ="Текущее число: " + currentScore;
+  let catchedNumber = (parseFloat(object.textContent))
+  const targ = document.getElementById("targetScore")
+
+  switch (complexity)
+  {
+    case 0:
+      {
+        currentScore += catchedNumber
+        currentScore = parseFloat(currentScore.toFixed(2))      //Дважды парс потому что 0.0000000001
+        const scorec = document.getElementById("currentScore")
+        scorec.textContent ="Текущее число: " + currentScore;
+      }
+      break;
+      case 1:
+        {
+          if (catchedNumber % 2 ==1)
+          {
+            finishGame();
+          }
+          currentScore += catchedNumber
+          currentScore = parseFloat(currentScore.toFixed(2))      //Дважды парс потому что 0.0000000001
+          const scorece = document.getElementById("currentScore")
+          scorece.textContent ="Текущее число: " + currentScore;
+        }
+        break;
+        case 2:
+          {
+            switch (cnt)
+            {
+              case 0:
+                firstHard = catchedNumber
+                cnt++
+                break;
+              case 1:
+                secondHard = catchedNumber
+                cnt++
+                break;
+              case 2:
+                {
+                thirdHard = catchedNumber
+                let result = firstHard - secondHard - thirdHard;
+                firstHard=0
+                secondHard=0
+                thirdHard=0
+                cnt=0
+                if (result ==0)
+                currentScore++
+                targ.textContent="Очки: " + currentScore;
+                }
+                break;
+            }
+            const scorecec = document.getElementById("currentScore")
+            scorecec.textContent = firstHard + "=" + secondHard + "+" + thirdHard;            
+          }
+          break;
+  }
   if (currentScore >= target || isNaN(currentScore))
     finishGame()
 }
@@ -158,7 +217,7 @@ function finishGame()
 
 function init()
 {
-
+  const targ = document.getElementById("targetScore")
   complexity = JSON.parse(localStorage.getItem('currentComplexity'))
   if (complexity === null) {
     complexity = 3
@@ -172,14 +231,22 @@ function init()
     case 0:
       target = getRandomInteger(90,120)
       timingValue = 2000;
+      targ.textContent="Целевое число: " + target;
       break
     case 1:
-      target = getRandomInteger(120,150)
-      timingValue = 1000
-      break;
+      let temp = getRandomInteger(60, 75);
+      target = temp * 2;
+      timingValue = 1000;
+      const scorece = document.getElementById("explainer")
+      scorece.textContent ="ТОЛЬКО ЧЕТНЫЕ";
+      targ.textContent="Целевое число: " + target;
+      break
     case 2:
-      target = parseFloat(getRandomFloat(120,150,2))
-      timingValue = 800;
+      target = 30;
+      timingValue = 1500;
+      const scorecec = document.getElementById("explainer")
+      scorecec.textContent ="Сумма из 3, первое число - итог, второе и третье число - слагаемые";
+      targ.textContent="Очки: " + 0;
       break;
     default:
       target = 0;
@@ -187,7 +254,7 @@ function init()
   }
 
   console.log("inited")
-    const targ = document.getElementById("targetScore")
-  targ.textContent="Целевое число: " + target;
+    
+  
 }
   document.addEventListener("keydown", handleKeyPress);

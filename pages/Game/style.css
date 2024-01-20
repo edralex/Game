@@ -73,6 +73,15 @@
     padding: 10px;
     border-radius: 4px;
   }
+  #explainer {
+    font-size: 15px;
+    width: 20%;
+    height: 5%;
+    font-weight: bold;
+    color: black;
+    padding: 10px;
+    border-radius: 4px;
+  }
 
 
 
@@ -88,22 +97,14 @@
     color: white;
     font-size: 1.95em;
     user-select: none;
-  
-    /* Flexbox styles */
+
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
   }
   
-  @keyframes fallAnimation {
-    0% {
-      top: 0;
-    }
-    100% {
-      top: 90%;
-    }
-  }
+
 .watchbutton{
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.3rem;
@@ -190,3 +191,38 @@ h2{
 p{
     font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes fallAnimation {
+    0% {
+      top: 0;
+    }
+    100% {
+      top: 90%;
+    }
+  }
+  @keyframes flyAnimation {
+    0% {
+      top: 90%;
+    }
+    100% {
+      top: 0%;
+    }
+  }
+  @keyframes weaveAnimation {
+  0% {
+    top: 0%;
+  }
+  25% {
+    top: 50%;
+  }
+  50% {
+    top: 90%;
+  }
+  75% {
+    top: 50%;
+  }
+  100% {
+    top: 0%;
+  }
+}
+
