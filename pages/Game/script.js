@@ -14,6 +14,9 @@ let secondHard = 0
 let thirdHard = 0
 let cnt = 0;
 
+let middleVariant = getRandomInteger(1, 3);   //Вариант для средней сложности
+
+
 document.addEventListener("DOMContentLoaded", init());
 
 function createFallingObject() {
@@ -155,10 +158,34 @@ function onObjectCatch(object)
       break;
       case 1:
         {
-          if (catchedNumber % 2 ==1)
+          switch (middleVariant)
           {
-            finishGame();
+            case 1:
+            {
+              if (catchedNumber % 2 == 1)      //Только четные
+              {
+                finishGame();
+              }
+            }
+            break
+            case 2:
+              {
+                if (catchedNumber % 2 == 0)      //Только нечетные
+                {
+                  finishGame();
+                }
+              }
+            break
+            case 3:
+              {
+                if (catchedNumber < 5)      //Только числа больше 5
+                {
+                  finishGame();
+                }
+              }
+            break
           }
+
           currentScore += catchedNumber
           currentScore = parseFloat(currentScore.toFixed(2))      //Дважды парс потому что 0.0000000001
           const scorece = document.getElementById("currentScore")
@@ -181,11 +208,11 @@ function onObjectCatch(object)
                 {
                 thirdHard = catchedNumber
                 let result = firstHard - secondHard - thirdHard;
-                firstHard=0
-                secondHard=0
-                thirdHard=0
-                cnt=0
-                if (result ==0)
+                firstHard = 0
+                secondHard = 0
+                thirdHard = 0
+                cnt = 0
+                if (result == 0)
                 currentScore++
                 targ.textContent="Очки: " + currentScore;
                 }
@@ -202,10 +229,14 @@ function onObjectCatch(object)
 
 function finishGame()
 {
-  if ( currentScore==target )
+  if ( currentScore == target )
   {
       let presumableScore = 200 - stepCounter * 5;
       score = presumableScore > 0 ? presumableScore : 0;
+      if (complexity == 1)
+      {
+        score = score * 1.5;
+      }
   }
   else 
     score=0;
@@ -235,22 +266,49 @@ function init()
     case 0:
       target = getRandomInteger(90,120)
       timingValue = 2000;
-      targ.textContent="Целевое число: " + target;
+      targ.textContent = "Целевое число: " + target;
       break
     case 1:
+      {
+      const scorece = document.getElementById("explainer")
+      switch (middleVariant)
+      {
+        case 1:
+        {
+
+          scorece.textContent = "ТОЛЬКО ЧЕТНЫЕ";
+        }
+        break
+        case 2:
+          {
+            scorece.textContent = "ТОЛЬКО НЕЧЕТНЫЕ";
+          }
+        break
+        case 3:
+          {
+            scorece.textContent = "ЧИСЛА БОЛЬШЕ 4";
+          }
+        break
+        default:
+          {
+            scorece.textContent = "Ошибка";
+          }
+          break;
+
+      }
       let temp = getRandomInteger(60, 75);
       target = temp * 2;
       timingValue = 1000;
-      const scorece = document.getElementById("explainer")
-      scorece.textContent ="ТОЛЬКО ЧЕТНЫЕ";
+            
       targ.textContent="Целевое число: " + target;
       break
+    }
     case 2:
       target = 30;
       timingValue = 1400;
       const scorecec = document.getElementById("explainer")
-      scorecec.textContent ="Сумма из 3, первое число - итог, второе и третье число - слагаемые";
-      targ.textContent="Очки: " + 0;
+      scorecec.textContent = "Сумма из 3, первое число - итог, второе и третье число - слагаемые";
+      targ.textContent = "Очки: " + 0;
       break;
     default:
       target = 0;
@@ -261,4 +319,5 @@ function init()
     
   
 }
+
   document.addEventListener("keydown", handleKeyPress);
