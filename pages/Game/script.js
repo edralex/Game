@@ -44,7 +44,7 @@ function createFallingObject() {
 
   const gameWindowWidth = gameWindow.offsetWidth;
   const randomLeft = Math.random() * 100;
-  const objectLeft = (randomLeft / 100) * (gameWindowWidth-70) + "px";  //-70, чтобы не падали за рамку
+  const objectLeft = (randomLeft / 100) * (gameWindowWidth - 80) + "px";  //-80, чтобы не падали за рамку
   object.style.left = objectLeft;
 
   gameWindow.appendChild(object);
@@ -241,11 +241,11 @@ function finishGame()
   else 
     score=0;
 
-  if (complexity==2)
+  if (complexity == 2)
   {
     score = currentScore * 10;
   }
-  savePlayerResults(currentName,score);
+  savePlayerResults(currentName, score);
   window.location.href = "../Rating/index.html";
 
 }
@@ -259,7 +259,7 @@ function init()
   }
   currentName = JSON.parse(localStorage.getItem('currentName'))
   const nad = document.getElementById("playerName")
-  nad.textContent="Игрок: " + currentName;
+  nad.textContent = "Игрок: " + currentName;
 
   switch (complexity)
   {
