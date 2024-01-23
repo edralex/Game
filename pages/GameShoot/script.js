@@ -27,6 +27,12 @@ document.addEventListener("keydown", function(event) {
     onSpace()
   }
 
+  if (event.code === "ArrowDown") 
+  {
+    event.preventDefault();  
+    onArrowDown()
+  }
+
    if (event.key === "ArrowLeft" && lineRect.left - step >= gameWindowRect.left) {
     line.style.left = `${lineRect.left - step}px`;
   } else if (event.key === "ArrowRight" && lineRect.right + step <= gameWindowRect.right) {
@@ -59,15 +65,21 @@ function savePlayerResults(name,score)    //Сохранение результ�
 
 // const timerDuration = 60000; // 1 минута
 let timer = null;
+function onArrowDown()
+{
+  const fallingObject = objectHolder.shift();
+  obj.removeChild(fallingObject);
+  objectHolder.push(createObject())
+  obj.appendChild(objectHolder[objectHolder.length - 1])
+}
 
 function onSpace()
 {
-
       const fallingObject = objectHolder.shift();
       objectHolder.push(createObject())
       obj.appendChild(objectHolder[objectHolder.length - 1])
       fallingObject.className = 'falling-object';
-      fallingObject.style.animation = "flyAnimation 2s linear forwards"; 
+      fallingObject.style.animation = "flyAnimation 1s linear forwards"; 
       fallingObject.style.position = "absolute";
 
       const line = document.getElementById('movableLine'); 
@@ -76,12 +88,35 @@ function onSpace()
 
       fallingObject.style.left = `${lineCenter}px`;
       gameWindow.appendChild(fallingObject);
-      fallingObject.addEventListener("animationend", function () {
-        gameWindow.removeChild(fallingObject);
-      });
+      let evenHolder = document.getElementById('evenHolder');
+      let oddHolder = document.getElementById('oddHolder');
 
+      fallingObject.addEventListener("animationend", function () {
+        fallingObject.style.position = "static";
+        fallingObject.style.animation = "none";
+        if (lineCenter - 40 > 400) 
+        {
+          evenHolder.appendChild(fallingObject);
+        }
+        else
+        {
+          oddHolder.appendChild(fallingObject);
+        }
+      });
 }
 
+function validateSequence(el)
+{
+  let ch = el.childNodes;
+  let intArray = Array.from(ch, ele => parseInt(ele.textContent, 10));
+  let sum = intArray[1] - intArray[0];
+  for (let i = 0; i < intArray.length - 1; i++) {
+    if (intArray[i + 1] - intArray[i] !== sum) {
+      return false;
+    }
+  }
+  return true;
+}
 // function startTimer() {
 //   const startTime = Date.now();
 
@@ -139,14 +174,11 @@ function init()
   const nad = document.getElementById("playerName")
   nad.textContent = "Игрок: " + currentName;
 
-  
-  for(var i = 0; i < 5;i++)
+    for(var i = 0; i < 5; i++)
   {
     objectHolder.push(createObject())
     obj.appendChild(objectHolder[i])
   }
-
-  
 }
 
   document.addEventListener("keydown", handleKeyPress);

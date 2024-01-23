@@ -25,22 +25,23 @@
     background-color: #cccccc;
 }
 #gameWindow{
+    position: relative;
     width: 50%;
     height: 100%;
     background-color: wheat;
 }
 #movableLine {
   position: absolute;
-  top: 88%;
-  left: 25%;
+  top: 86%;
+  left: 45%;
   width: 160px;
   height: 2px;
   background-color: #000;
 }
 #objectContainer {
   position: absolute;
-  top: 90%;
-  left: 15%;
+  top: 88%;
+  left: 26%;
   width: 420px;
   height: 81px;
   border: 1px solid #000;
@@ -96,6 +97,35 @@
     color: black;
     padding: 10px;
     border-radius: 4px;
+  }
+  #evenHolder{
+    position: absolute;
+    height: 200px;
+    width: 50%;
+    right:0;
+    top:0;
+    border: 1px solid #000;
+    display: flex;
+    gap:5px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex:1
+  }
+  #oddHolder{
+    position: absolute;
+    height: 200px;
+    width: 50%;
+    left:0;
+    top:0;
+    border: 1px solid #000;
+    display: flex;
+    gap:5px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex:1
+    
   }
 
 
