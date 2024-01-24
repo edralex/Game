@@ -97,19 +97,49 @@ function onSpace()
         if (lineCenter - 40 > 400) 
         {
           evenHolder.appendChild(fallingObject);
+          if (evenHolder.childNodes.length >= 5)
+          {
+            if (validateSequence(evenHolder, true))
+            {
+            while (evenHolder.lastElementChild) {
+                evenHolder.removeChild(evenHolder.lastElementChild);
+              }
+            }
+            else
+              evenHolder.removeChild(evenHolder.lastElementChild);
+        }
         }
         else
         {
           oddHolder.appendChild(fallingObject);
+          if (oddHolder.childNodes.length >= 5)
+          {
+          if (validateSequence(oddHolder, false))
+          {
+          while (oddHolder.lastElementChild) {
+              oddHolder.removeChild(oddHolder.lastElementChild);
+            }
+          }
+          else
+            oddHolder.removeChild(oddHolder.lastElementChild);
         }
+      }
       });
 }
 
-function validateSequence(el)
+function validateSequence(el,order)   //order - true - возрастающая, false - убывающая
 {
   let ch = el.childNodes;
   let intArray = Array.from(ch, ele => parseInt(ele.textContent, 10));
   let sum = intArray[1] - intArray[0];
+  if (sum > 0 && !order)
+  {
+    return false;
+  }
+  if (sum < 0 && order)
+  {
+    return false;
+  }
   for (let i = 0; i < intArray.length - 1; i++) {
     if (intArray[i + 1] - intArray[i] !== sum) {
       return false;
@@ -117,6 +147,7 @@ function validateSequence(el)
   }
   return true;
 }
+
 // function startTimer() {
 //   const startTime = Date.now();
 
