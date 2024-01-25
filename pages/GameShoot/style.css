@@ -17,6 +17,7 @@
     height: 780px;
 }
 #menuElement{
+    position: relative;
     display: flex;
     flex-direction: column;
     gap:3rem;
@@ -70,6 +71,9 @@
     color: black;
     padding: 10px;
     border-radius: 4px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
   }
   #targetScore {
     font-size: 24px;
@@ -88,6 +92,9 @@
     color: black;
     padding: 10px;
     border-radius: 4px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
   }
   #explainer {
     font-size: 15px;
@@ -97,6 +104,24 @@
     color: black;
     padding: 10px;
     border-radius: 4px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+  }
+  #expControl {
+    position: absolute;
+    top:0;
+    right:0;
+    font-size: 20px;
+    width: 38%;
+    height: 20%;
+    font-weight: bold;
+    color: black;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
   }
   #evenHolder{
     position: absolute;
@@ -112,6 +137,20 @@
     text-align: center;
     flex:1
   }
+  #evenExplainer{
+    font-size: 15px;
+    position: absolute;
+    height: 200px;
+    width: 50%;
+    right:0;
+    top:0;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+
+  }
   #oddHolder{
     position: absolute;
     height: 200px;
@@ -125,7 +164,19 @@
     justify-content: center;
     text-align: center;
     flex:1
-    
+  }
+  #oddExplainer{
+    font-size: 15px;
+    position: absolute;
+    height: 200px;
+    width: 50%;
+    left:0;
+    top:0;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
   }
 
 
@@ -267,6 +318,15 @@ p{
   }
   100% {
     top: 0%;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 

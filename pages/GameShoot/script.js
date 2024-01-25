@@ -63,7 +63,7 @@ function savePlayerResults(name,score)    //Сохранение результ�
   localStorage.setItem('listOfPlayers', JSON.stringify(listOfPlayers))
 }
 
-// const timerDuration = 60000; // 1 минута
+const timerDuration = 60000; // 1 минута
 let timer = null;
 function onArrowDown()
 {
@@ -101,12 +101,19 @@ function onSpace()
           {
             if (validateSequence(evenHolder, true))
             {
+              currentScore += 1;
             while (evenHolder.lastElementChild) {
                 evenHolder.removeChild(evenHolder.lastElementChild);
               }
             }
             else
+            {
+              if (currentScore > 0)
+              currentScore -= 1;
+            while (evenHolder.lastElementChild) {
               evenHolder.removeChild(evenHolder.lastElementChild);
+            }
+          }
         }
         }
         else
@@ -116,14 +123,24 @@ function onSpace()
           {
           if (validateSequence(oddHolder, false))
           {
+            currentScore += 1;
           while (oddHolder.lastElementChild) {
               oddHolder.removeChild(oddHolder.lastElementChild);
             }
           }
           else
+          {
+            if (currentScore > 0)
+            currentScore -= 1;
+          while (oddHolder.lastElementChild) {
             oddHolder.removeChild(oddHolder.lastElementChild);
+          }
+        }
         }
       }
+      const scorec = document.getElementById("currentScore")
+      scorec.textContent ="Количество последовательностей: " + currentScore;
+      score = currentScore*10
       });
 }
 
@@ -148,41 +165,35 @@ function validateSequence(el,order)   //order - true - возрастающая,
   return true;
 }
 
-// function startTimer() {
-//   const startTime = Date.now();
+function startTimer() {
+  const startTime = Date.now();
 
-//   timer = setInterval(() => {
+  timer = setInterval(() => {
 
-//     const elapsedTime = Date.now() - startTime;
-//     const remainingTime = timerDuration - elapsedTime;
+    const elapsedTime = Date.now() - startTime;
+    const remainingTime = timerDuration - elapsedTime;
 
-//     const timerElement = document.getElementById("timerElement");
-//     timerElement.textContent = formatTime(remainingTime);
+    const timerElement = document.getElementById("timerElement");
+    timerElement.textContent = formatTime(remainingTime);
 
-//     if (remainingTime <= 0) {
-//       clearInterval(timer);
-//       timerElement.textContent = "Timer expired";
-//       finishGame();
-//     }
-//   }, 1000); 
-// }
+    if (remainingTime <= 0) {
+      clearInterval(timer);
+      timerElement.textContent = "Timer expired";
+      finishGame();
+    }
+  }, 1000); 
+}
 
 function formatTime(time) {
   const minutes = Math.floor(time / 60000);
   const seconds = Math.floor((time % 60000) / 1000);
   return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 }
-startTimer();
 
 function getRandomInteger(min, max) {                               //Получение рандомных значений
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-
-function onObjectCatch(object)
-{
- 
-}
 
 function finishGame()
 {
@@ -190,9 +201,10 @@ function finishGame()
   window.location.href = "../Rating/index.html";
 
 }
-
+startTimer();
 function init()
 {
+
   obj = document.getElementById("objectContainer");
 
   const targ = document.getElementById("targetScore")
@@ -210,6 +222,5 @@ function init()
     objectHolder.push(createObject())
     obj.appendChild(objectHolder[i])
   }
+  
 }
-
-  document.addEventListener("keydown", handleKeyPress);
