@@ -264,7 +264,7 @@ function init()
   switch (complexity)
   {
     case 0:
-      target = getRandomInteger(90,120)
+      target = getRandomInteger(30,60)
       timingValue = 2000;
       targ.textContent = "Целевое число: " + target;
       break
