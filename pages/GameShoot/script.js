@@ -16,6 +16,7 @@ let obj = null;
 document.addEventListener("DOMContentLoaded", init());
 
 document.addEventListener("keydown", function(event) {
+  event.preventDefault();
   const line = document.getElementById("movableLine");
   const step = 10; 
   const gameWindow = document.getElementById("gameWindow");
@@ -23,13 +24,11 @@ document.addEventListener("keydown", function(event) {
   const lineRect = line.getBoundingClientRect();
   if (event.code === "Space") 
   {
-    event.preventDefault();  
     onSpace()
   }
 
   if (event.code === "ArrowDown") 
   {
-    event.preventDefault();  
     onArrowDown()
   }
 
@@ -84,7 +83,7 @@ function onSpace()
 
       const line = document.getElementById('movableLine'); 
       const lineRect = line.getBoundingClientRect();
-      const lineCenter = lineRect.left + 40 ;
+      const lineCenter = lineRect.left + 80;
 
       fallingObject.style.left = `${lineCenter}px`;
       gameWindow.appendChild(fallingObject);

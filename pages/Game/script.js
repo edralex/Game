@@ -264,6 +264,8 @@ function init()
   switch (complexity)
   {
     case 0:
+      const scorecece = document.getElementById("explainer")
+      scorecece.textContent = "Ловите числа нажатием мышки либо нажатием клавиши \'Space\'. Цель игры - собрать целевое число из падающих чисел.";
       target = getRandomInteger(30,60)
       timingValue = 2000;
       targ.textContent = "Целевое число: " + target;
@@ -305,9 +307,9 @@ function init()
     }
     case 2:
       target = 30;
-      timingValue = 1400;
+      timingValue = 1800;
       const scorecec = document.getElementById("explainer")
-      scorecec.textContent = "Сумма из 3, первое число - итог, второе и третье число - слагаемые";
+      scorecec.textContent = "Ловите числа нажатием мышки либо нажатием клавиши \'Space\'. Цель игры - Собрать сумму из двух чисел. Первое число - результат сложения. Второе и третье число - слагаемые";
       targ.textContent = "Очки: " + 0;
       break;
     default:
